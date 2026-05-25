@@ -3,7 +3,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
 from telegram.ext import Application, CommandHandler, ContextTypes, ChatJoinRequestHandler, CallbackQueryHandler
 
-BOT_TOKEN = "8883025490:AAGMU-p-aI3_gCBxStH6MjkkBN__aubF7Ho"
+BOT_TOKEN = "8883025490:AAE_vxdEaX2-jraF8QaJ3KBgPeZO1sJTpoc"
 BOT_USERNAME = "HottyApprovalBot"
 
 UPDATE = "Soothing_Sanctuary"
@@ -97,7 +97,7 @@ async def approve_request(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 
-def main():
+async def main():
     app = Application.builder().token(BOT_TOKEN).build()
 
     app.add_handler(CommandHandler("start", start))
@@ -105,26 +105,23 @@ def main():
     app.add_handler(CallbackQueryHandler(disclaimer_callback, pattern="disclaimer"))
     app.add_handler(ChatJoinRequestHandler(approve_request))
 
-    app.run_polling()
+    await app.initialize()
+    await app.updater.start_polling()
+    await app.start()
+    
+    while True:
+        await asyncio.sleep(3600)
 
 
 if __name__ == '__main__':
     try:
-        asyncio.run(main())
+        loop = asyncio.get_running_loop()
     except RuntimeError:
-        loop = asyncio.get_event_loop()
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+    if loop.is_running():
+        loop.create_task(main())
+    else:
         loop.run_until_complete(main())
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("disclaimer", disclaimer))
-    app.add_handler(CallbackQueryHandler(disclaimer_callback, pattern="disclaimer"))
-    app.add_handler(ChatJoinRequestHandler(approve_request))
-
-    app.run_polling()
-
-
-if __name__ == '__main__':
-    try:
-        asyncio.run(main())
-    except RuntimeError:
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(main())
+        
