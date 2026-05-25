@@ -29,9 +29,6 @@ DEVELOPER_USER = "Umm_hotty"
 LOGO_URL = "https://t.me/ahh_nexus/8"
 # ========================================================
 
-TOTAL_APPROVED_USERS = 1458
-TOTAL_CHATS_MANAGED = 12
-
 # 1. PREMIUM START COMMAND (DM VIEW WITH SPOILER IMAGE)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
@@ -41,16 +38,16 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"   ✨ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ ɴᴇxᴛ-ɢᴇɴ sʏsᴛᴇᴍ ✨\n"
         f"╰━━━━━━━━━━━━━━━━━━━╯\n\n"
         f"👋 𝖧𝖾𝗒 <a href='tg://settings'>{user.first_name}</a> !\n\n"
-        f"🦅 𝖨 𝖺𝗆 𝖺𝗇 𝗂𝗇𝗌𝗍𝖺𝗇𝗍 <b>𝗔𝘂𝘁𝗼 𝗔𝗽𝗽𝗿𝗼𝘃𝗮𝗹 𝗦𝘆𝘀𝘁𝗲𝗺</b> 𝖻𝗎𝗂𝗅𝗍 𝗍𝗈 𝖼𝗅𝖾𝖺𝗇𝗅𝗒 𝖺𝗎𝗍𝗈𝗆𝖺𝗍𝖾 𝗒𝗈𝗎𝗋 𝖼𝗈𝗆𝗆𝗎𝗇𝗂𝗍𝗒.\n\n"
+        f"🦅 𝖨 𝖺𝗆 𝖺𝗇 𝗂𝗇𝗌𝗍𝖺𝗇𝗍 <b>𝗔𝘂𝘁𝗼 𝗔𝗽𝗽𝗿𝗼𝘃𝗮𝗹 𝗦𝘆𝘀𝘁𝗲𝗺</b> 𝖻𝗎𝗂𝗅𝗍 𝗍𝗈 𝖼𝗅𝖾𝖺𝗇𝗅𝗒 𝖺𝗎𝗍𝗈context𝗆𝖺𝗍𝖾 𝗒𝗈𝗎𝗋 𝖼𝗈𝗆𝗆𝗎𝗇𝗂ᴛ𝗒.\n\n"
         f"⚡ <b>𝗣𝗥𝗘𝗠𝗜𝗨𝗠 𝗙𝗘𝗔𝗧𝗨𝗥𝗘𝗦 :</b>\n"
         f"╭━━━━━━━━━━━━━━━━━━━╮\n"
         f"┃ 👤 <b>𝖨𝗇𝗌𝗍𝖺𝗇𝗍 𝖠𝗉𝗉𝗋𝗈𝗏𝖺𝗅</b> ➔ `0.01 s𝖾𝖼` \n"
         f"┃ 🛡️ <b>𝖠𝗇𝗍𝗂-𝖲𝗉𝖺ᴍ</b> ➔ `𝖤𝗇𝖺𝖻𝗅𝖾𝖽`\n"
-        f"┃ 📈 <b>𝖴𝗉𝗍𝗂𝗆𝖾</b> ➔ `24/7 𝖭𝗈𝗇-𝖲𝗍𝗈𝗉`\n"
+        f"┃ 📈 <b>𝖴𝗉𝗍𝗂𝗆𝖾</b> ➔ `24/7 𝖭𝗈𝗇-𝖲ᴛᴏᴘ`\n"
         f"╰━━━━━━━━━━━━━━━━━━━╯\n\n"
         f"📌 <b>ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴍᴇ :</b>\n"
-        f"🤖 𝖩𝗎𝗌𝗍 𝖺𝖽𝖽 𝗆𝖾 𝖺𝗌 𝖺𝗇 <b>𝖠𝖽𝗆𝗂𝗇𝗂𝗌𝗍𝗋𝖺𝗍𝗈𝗋</b> 𝗂𝗇 𝗒𝗈𝗎𝗋 𝖢𝗁𝖺𝗇𝗇𝖾𝗅 𝗈𝗋 𝖦𝗋𝗈𝗎𝗉 𝗐𝗂тах *\"𝖨𝗇𝗏𝗂𝗍𝖾 𝖴𝗌𝖾𝗋𝗌 𝗏𝗂𝖺 𝖫𝗂𝗇k\"* 𝗉𝖾𝗋𝗆𝗂𝗌𝗌𝗂𝗈𝗇!\n\n"
-        f"👑 <b>ᴄʀᴇᴀᴛᴇᴅ ʙʏ :</b> @{DEVELOPER_USER}"
+        f"🤖 𝖩𝗎𝗌ᴛ 𝖺𝖽𝖽 𝗆𝖾 𝖺𝗌 𝖺𝗇 <b>𝖠𝖽𝗆𝗂𝗇𝗂𝗌𝗍𝗋𝖺𝗍𝗈𝗋</b> 𝗂𝗇 𝗒𝗈𝗎𝗋 𝖢𝗁𝖺𝗇𝗇𝖾xl 𝗈𝗋 𝖦𝗋𝗈𝗎𝗉 𝗐𝗂ᴛʜ *\"𝖨𝗇𝗏𝗂ᴛ𝖾 𝖴𝗌𝖾𝗋𝗌 𝗏𝗂𝖺 𝖫𝗂𝗇ᴋ\"* 𝗉𝖾𝗋<b>𝗆𝗂𝗌𝗌𝗂𝗈𝗇!</b>\n\n"
+        f"👑 <b><b>ᴄʀᴇᴀᴛᴇᴅ</b> ʙʏ :</b> @{DEVELOPER_USER}"
     )
 
     buttons = [
@@ -60,10 +57,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ],
         [
             InlineKeyboardButton("🔋 𝖡𝗈𝗈𝗌𝗍 & 𝖴𝗉𝖽𝖺𝗍𝖾𝗌 🤖", url=f"https://t.me/{UPDATE_CHANNEL}"),
-            InlineKeyboardButton("📊 𝖡𝗈𝗍 𝖲𝗍𝖺𝗍s", callback_data="stats")
-        ],
-        [
-            InlineKeyboardButton("⚠️ 𝖣𝗌𝖼𝗅𝖺𝗂𝗆𝖾𝗋 & 𝖯𝗈𝗅𝗂𝖼𝗒", callback_data="disclaimer")
+            InlineKeyboardButton("⚠️ 𝖣𝗂𝗌𝖼𝗅𝖺𝗂𝗆𝖾𝗋 & 𝖯𝗈𝗅𝗂𝖼𝗒", callback_data="disclaimer")
         ]
     ]
 
@@ -82,7 +76,7 @@ async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE):
     end_time = time.time()
     
     latency = round((end_time - start_time) * 1000)
-    await message.edit_text(f"⚡ <b>𝖯𝗈𝗇𝗀!</b> `{latency}𝗆𝗌` 🟢", parse_mode=ParseMode.HTML)
+    await message.edit_text(f"⚡ <b>𝖯𝗈<b>𝗇𝗀!</b></b> `{latency}𝗆𝗌` 🟢", parse_mode=ParseMode.HTML)
 
 # 3. BOT ADDED TO CHAT
 async def bot_added_to_chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -108,7 +102,7 @@ async def bot_added_to_chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
         except Exception:
             pass
 
-# 4. INSTANT AUTO-APPROVAL -> DM NOTIFICATION
+# 4. INSTANT AUTO-APPROVAL -> DM NOTIFICATION (UPDATES & DEVELOPER BUTTONS)
 async def approve_request(update: Update, context: ContextTypes.DEFAULT_TYPE):
     req = update.chat_join_request
     chat = req.chat
@@ -145,22 +139,7 @@ async def approve_request(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception:
         pass
 
-# 5. STATS CALLBACK
-async def stats_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    query = update.callback_query
-    await query.answer()
-
-    stats_text = (
-        f"📊 <b>𝖧𝗈𝗍tt𝗒𝖠𝗉𝗉𝗋𝗈𝗏𝖺𝗅𝖡𝗈𝗍 𝖲t𝖺𝗍𝗂𝗌𝗍𝗂𝖼𝗌</b>\n"
-        f"━━━━━━━━━━━━━━━━━━━━\n\n"
-        f"🟢 <b>𝖳𝗈𝗍𝖺𝗅 𝖴𝗌𝖾𝗋𝗌 𝖠𝗉𝗉𝗋𝗈𝗏𝖾𝖽:</b> `{TOTAL_APPROVED_USERS}+` \n"
-        f"🛡️ <b>𝖢𝗁𝖺𝗇𝗇𝖾𝗅𝗌 & 𝖦𝗋𝗈𝗎𝗉𝗌 𝖬𝖺𝗇𝖺𝗀𝖾𝖽:</b> `{TOTAL_CHATS_MANAGED}`\n"
-        f"⚡ <b>𝖲𝗒𝗌𝗍𝖾𝗆 𝖲𝗉𝖾𝖾𝖽:</b> `𝖮𝗉𝗍𝗂𝗆𝖺𝗅 (𝟢.𝟢𝟣𝗌)`\n\n"
-        f"📈 <i>Bot status is working 24/7 non-stop perfectly.</i>"
-    )
-    await query.message.reply_text(text=stats_text, parse_mode=ParseMode.HTML)
-
-# 6. DISCLAIMER CALLBACK
+# 5. DISCLAIMER CALLBACK
 async def disclaimer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
@@ -180,7 +159,6 @@ async def main():
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("ping", ping))
     app.add_handler(CallbackQueryHandler(disclaimer_callback, pattern="disclaimer"))
-    app.add_handler(CallbackQueryHandler(stats_callback, pattern="stats"))
     app.add_handler(ChatJoinRequestHandler(approve_request))
     app.add_handler(ChatMemberHandler(bot_added_to_chat, ChatMemberHandler.MY_CHAT_MEMBER))
 
@@ -204,119 +182,4 @@ if __name__ == '__main__':
         loop.create_task(main())
     else:
         loop.run_until_complete(main())
-
-# 4. INSTANT AUTO-APPROVAL -> SEND NOTIFICATION TO PERSONAL DM WITH TWO BUTTONS
-async def approve_request(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    req = update.chat_join_request
-    chat = req.chat
-    user = req.from_user
-
-    # Instant Auto-Approval Action
-    await context.bot.approve_chat_join_request(chat_id=chat.id, user_id=user.id)
-
-    # DM Notification Layout
-    dm_text = (
-        f"✨ **<b>ᴊᴏɪɴ ʀᴇǫᴜᴇsᴛ ᴀᴘᴘʀᴏᴠᴇᴅ</b>** ✨\n"
-        f"━━━━━━━━━━━━━━━━━━━━\n\n"
-        f"🤝 Hello <a href='tg://settings'>{user.first_name}</a>,\n\n"
-        f"🎉 Your request to join **{chat.title}** has been **Successfully Approved** instantly by our system!\n\n"
-        f"🚀 *Powered by @{BOT_USERNAME}*"
-    )
-
-    # Left: Bot Updates | Right: Developer Only
-    dm_buttons = [
-        [
-            InlineKeyboardButton("📢 𝖡𝗈𝗍 𝖴𝗉𝖽𝖺𝗍𝖾𝗌", url=f"https://t.me/{UPDATE_CHANNEL}"),
-            InlineKeyboardButton("👑 𝖣𝖾𝗏𝖾𝗅𝗈𝗉𝖾𝗋", url=f"https://t.me/{DEVELOPER_USER}")
-        ]
-    ]
-
-    try:
-        await context.bot.send_message(
-            chat_id=user.id,
-            text=dm_text,
-            parse_mode=ParseMode.HTML,
-            reply_markup=InlineKeyboardMarkup(dm_buttons),
-            disable_web_page_preview=True
-        )
-    except Exception:
-        pass
-
-# 5. STATS CALLBACK LOGIC
-async def stats_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    query = update.callback_query
-    await query.answer()
-
-    stats_text = (
-        f"📊 <b>📊 𝖧𝗈𝗍𝗍𝗒𝖠𝗉𝗉𝗋𝗈𝗏𝖺𝗅𝖡𝗈𝗍 𝖲𝗍𝖺𝗍𝗂𝗌𝗍𝗂𝖼𝗌</b>\n"
-        f"━━━━━━━━━━━━━━━━━━━━\n\n"
-        f"🟢 <b>𝖳𝗈𝗍𝖺𝗅 𝖴𝗌𝖾𝗋𝗌 𝖠𝗉𝗉𝗋𝗈𝗏𝖾𝖽:</b> `{TOTAL_APPROVED_USERS}+` \n"
-        f"🛡️ <b>𝖢𝗁𝖺𝗇𝗇𝖾𝗅𝗌 & 𝖦𝗋𝗈𝗎𝗉𝗌 𝖬𝖺𝗇𝖺𝗀𝖾𝖽:</b> `{TOTAL_CHATS_MANAGED}`\n"
-        f"⚡ <b>𝖲𝗒𝗌𝗍𝖾𝗆 𝖲𝗉𝖾𝖾𝖽:</b> `𝖮𝗉𝗍𝗂𝗆𝖺𝗅 (𝟢.𝟢𝟣𝗌)`\n\n"
-        f"📈 <i>Bot status is working 24/7 non-stop perfectly.</i>"
-    )
-    await query.message.reply_text(text=stats_text, parse_mode=ParseMode.HTML)
-
-# 6. DISCLAIMER CALLBACK
-async def disclaimer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    query = update.callback_query
-    await query.answer()
-
-    text = (
-        f"<b>📢 Disclaimer – Auto Approve Join Request Bot</b>\n\n"
-        f"🔹 This bot is an <b>automated system</b> that approves join requests. By using this bot, you agree:\n\n"
-        f"<b>✅ No Liability</b>\nThe bot owner & developers are <b>not responsible</b> for any misuse or unauthorized activity.\n\n"
-        f"<b>🤖 Automated Decisions</b>\nThe bot works 100% automatically and instantly.\n\n"
-        f"<b>📌 Ensure responsible usage to keep your community secure!</b>"
-    )
-    await query.message.reply_text(text=text, parse_mode=ParseMode.HTML)
-
-async def main():
-    app = Application.builder().token(BOT_TOKEN).build()
-
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("ping", ping))
-    app.add_handler(CallbackQueryHandler(disclaimer_callback, pattern="disclaimer"))
-    app.add_handler(CallbackQueryHandler(stats_callback, pattern="stats"))
-    app.add_handler(ChatJoinRequestHandler(approve_request))
-    
-    from telegram.ext import ChatMemberHandler
-    app.add_handler(ChatMemberHandler(bot_added_to_chat, ChatMemberHandler.MY_CHAT_MEMBER))
-
-    await app.initialize()
-    await app.updater.start_polling()
-    await app.start()
-    
-    while True:
-        await asyncio.sleep(3600)
-
-if __name__ == '__main__':
-    threading.Thread(target=start_web_server, daemon=True).start()
-
-    try:
-        loop = asyncio.get_running_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        
-    if loop.is_running():
-        loop.create_task(main())
-    else:
-        loop.run_until_complete(main())
-    
-    while True:
-        await asyncio.sleep(3600)
-
-
-if __name__ == '__main__':
-    try:
-        loop = asyncio.get_running_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        
-    if loop.is_running():
-        loop.create_task(main())
-    else:
-        loop.run_until_complete(main())
-        
+               
