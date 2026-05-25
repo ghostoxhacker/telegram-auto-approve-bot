@@ -7,13 +7,16 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
 from telegram.ext import Application, CommandHandler, ContextTypes, ChatJoinRequestHandler, CallbackQueryHandler, ChatMemberHandler
 
-# Render Web Server for Port Bypass
+# Uptime tracker
+start_time_init = time.time()
+
+# Web Server for Port Bypass
 class WebServer(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-        self.wfile.write(b"HottyApprovalBot is live and running perfectly!")
+        self.wfile.write(b"HottyApprovalBot is live!")
 
 def start_web_server():
     port = int(os.environ.get("PORT", 10000))
@@ -22,22 +25,62 @@ def start_web_server():
 
 # ==================== CONFIGURATIONS ====================
 BOT_TOKEN = os.getenv("BOT_TOKEN", "8883025490:AAGMU-p-aI3_gCBxStH6MjkkBN__aubF7Ho")
+OWNER_ID = 8576582616
+users_list = set()
 BOT_USERNAME = os.getenv("BOT_USERNAME", "HottyApprovalBot")
 UPDATE_CHANNEL = os.getenv("UPDATE_CHANNEL", "Soothing_Sanctuary")
-SUPPORT_GRP = os.getenv("SUPPORT_GRP", "PrepNationGrp")
 DEVELOPER_USER = "Umm_hotty"
 LOGO_URL = "https://t.me/ahh_nexus/8"
 # ========================================================
 
-# 1. CLEAN START COMMAND (DM VIEW WITH SPOILER IMAGE)
+# ADVANCED PING COMMAND
+async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    start_time = time.time()
+    msg = await update.message.reply_text("⚡ Checking System Health")
+    end_time = time.time()
+    
+    latency = round((end_time - start_time) * 1000)
+    uptime_seconds = int(time.time() - start_time_init)
+    hours, remainder = divmod(uptime_seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    
+    status_text = (
+        f"<b>⚡ SYSTEM STATUS</b>\n\n"
+        f"<b>• Latency:</b> {latency}ms\n"
+        f"<b>• Uptime:</b> {hours}h {minutes}m {seconds}s\n"
+        f"<b>• Status:</b> Operational 🟢\n\n"
+        f"🚀 <i>Hotty Bot is running smooth!</i>"
+    )
+    await msg.edit_text(status_text, parse_mode=ParseMode.HTML)
+
+# BROADCAST COMMAND
+async def broadcast(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.effective_user.id != OWNER_ID:
+        return
+    if not context.args:
+        await update.message.reply_text("Usage: /broadcast <message>")
+        return
+    
+    msg = " ".join(context.args)
+    count = 0
+    for user_id in users_list:
+        try:
+            await context.bot.send_message(chat_id=user_id, text=msg, parse_mode=ParseMode.HTML)
+            count += 1
+            await asyncio.sleep(0.05)
+        except:
+            continue
+    await update.message.reply_text(f"✅ Broadcast sent to {count} users.")
+
+# START COMMAND
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
+    users_list.add(user.id)
     
-    # Bina kisi stars, quotes ya faltu symbols ke clean text
     text = (
-        f"👑 <b>𝗔𝗨𝗧𝗢 𝗔𝗣𝗣𝗥𝗢𝗩𝗘 𝗕𝗢𝗧</b> 👑\n\n"
+        f"👑 <b>AUTO APPROVE BOT</b> 👑\n\n"
         f"👋 Hey <a href='tg://settings'>{user.first_name}</a>\n\n"
-        f"🦅 I am an instant <b>𝗔𝘂𝘁𝗼 𝗔𝗽𝗽𝗿𝗼𝘃𝗮𝗹 𝗦𝘆𝘀𝘁𝗲𝗺</b> built to manage your channels and groups automatically.\n\n"
+        f"🦅 I am an instant <b>Auto Approval System</b> built to manage your community automatically.\n\n"
         f"📌 <b>HOW TO USE ME</b>\n"
         f"Just add me as an <b>Administrator</b> in your chat with Invite Users via Link permission\n\n"
         f"👑 <b>CREATED BY</b> @{DEVELOPER_USER}"
@@ -50,7 +93,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ],
         [
             InlineKeyboardButton("🔋 Boost & Updates 🤖", url=f"https://t.me/{UPDATE_CHANNEL}"),
-            InlineKeyboardButton("⚠️ Disclaimer & Policy", callback_data="disclaimer")
+            InlineKeyboardButton("⚠️ Disclaimer", callback_data="disclaimer")
         ]
     ]
 
@@ -62,117 +105,43 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup=InlineKeyboardMarkup(buttons)
     )
 
-# 2. PING COMMAND
-async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    start_time = time.time()
-    message = await update.message.reply_text("⚡ Checking Speed", parse_mode=ParseMode.HTML)
-    end_time = time.time()
-    
-    latency = round((end_time - start_time) * 1000)
-    await message.edit_text(f"⚡ <b>Pong</b> {latency}ms 🟢", parse_mode=ParseMode.HTML)
-
-# 3. BOT ADDED TO CHAT
-async def bot_added_to_chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.my_chat_member and update.my_chat_member.new_chat_member.status in ["administrator", "member"]:
-        chat = update.my_chat_member.chat
-        
-        group_text = (
-            f"👑 <b>𝗛𝗼𝘁𝘁𝘆 𝗔𝗽𝗽𝗿𝗼𝘃𝗲 𝗕𝗼𝘁</b> is now <b>LIVE</b> 🟢\n\n"
-            f"📌 Grant Admin permissions with Invite Users via Link to auto-approve requests"
-        )
-        
-        group_buttons = [
-            [InlineKeyboardButton("🔋 CHECK BOT SETTINGS (DM) ➔", url=f"https://t.me/{BOT_USERNAME}?start=true")]
-        ]
-        
-        try:
-            await context.bot.send_message(
-                chat_id=chat.id,
-                text=group_text,
-                parse_mode=ParseMode.HTML,
-                reply_markup=InlineKeyboardMarkup(group_buttons)
-            )
-        except Exception:
-            pass
-
-# 4. INSTANT AUTO-APPROVAL -> DM NOTIFICATION
+# APPROVAL LOGIC
 async def approve_request(update: Update, context: ContextTypes.DEFAULT_TYPE):
     req = update.chat_join_request
-    chat = req.chat
     user = req.from_user
-
+    users_list.add(user.id)
     try:
-        await context.bot.approve_chat_join_request(chat_id=chat.id, user_id=user.id)
-    except Exception:
-        pass
-
-    dm_text = (
-        f"✨ <b>JOIN REQUEST APPROVED</b> ✨\n"
-        f"━━━━━━━━━━━━━━━━━━━━\n\n"
-        f"🤝 Hello <a href='tg://settings'>{user.first_name}</a>\n\n"
-        f"🎉 Your request to join <b>{chat.title}</b> has been <b>Successfully Approved</b> instantly by our system\n\n"
-        f"🚀 Powered by @{BOT_USERNAME}"
-    )
-
-    dm_buttons = [
-        [
-            InlineKeyboardButton("📢 Bot Updates", url=f"https://t.me/{UPDATE_CHANNEL}"),
-            InlineKeyboardButton("👑 Developer", url=f"https://t.me/{DEVELOPER_USER}")
-        ]
-    ]
-
-    try:
-        await context.bot.send_message(
-            chat_id=user.id,
-            text=dm_text,
-            parse_mode=ParseMode.HTML,
-            reply_markup=InlineKeyboardMarkup(dm_buttons),
-            disable_web_page_preview=True
+        await context.bot.approve_chat_join_request(chat_id=req.chat.id, user_id=user.id)
+        dm_text = (
+            f"✨ <b>JOIN REQUEST APPROVED</b> ✨\n\n"
+            f"🤝 Hello <a href='tg://settings'>{user.first_name}</a>,\n\n"
+            f"🎉 Your request to join <b>{req.chat.title}</b> has been <b>Successfully Approved</b> instantly.\n\n"
+            f"🚀 Powered by @{BOT_USERNAME}"
         )
-    except Exception:
+        await context.bot.send_message(chat_id=user.id, text=dm_text, parse_mode=ParseMode.HTML)
+    except:
         pass
-
-# 5. DISCLAIMER CALLBACK
-async def disclaimer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    query = update.callback_query
-    await query.answer()
-
-    text = (
-        f"<b>📢 Disclaimer – Auto Approve Join Request Bot</b>\n\n"
-        f"🔹 This bot is an <b>automated system</b> that approves join requests By using this bot, you agree\n\n"
-        f"<b>✅ No Liability</b>\nThe bot owner and developers are <b>not responsible</b> for any misuse or unauthorized activity\n\n"
-        f"<b>🤖 Automated Decisions</b>\nThe bot works 100 percent automatically and instantly\n\n"
-        f"<b>📌 Ensure responsible usage to keep your community secure</b>"
-    )
-    await query.message.reply_text(text=text, parse_mode=ParseMode.HTML)
 
 async def main():
     app = Application.builder().token(BOT_TOKEN).build()
-
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("ping", ping))
-    app.add_handler(CallbackQueryHandler(disclaimer_callback, pattern="disclaimer"))
+    app.add_handler(CommandHandler("broadcast", broadcast))
     app.add_handler(ChatJoinRequestHandler(approve_request))
-    app.add_handler(ChatMemberHandler(bot_added_to_chat, ChatMemberHandler.MY_CHAT_MEMBER))
-
+    app.add_handler(CallbackQueryHandler(lambda u, c: u.callback_query.answer("Disclaimer active"), pattern="disclaimer"))
+    
     await app.initialize()
     await app.updater.start_polling()
     await app.start()
-    
-    while True:
-        await asyncio.get_running_loop().run_in_executor(None, time.sleep, 3600)
+    while True: await asyncio.sleep(3600)
 
 if __name__ == '__main__':
     threading.Thread(target=start_web_server, daemon=True).start()
-
     try:
         loop = asyncio.get_running_loop()
     except RuntimeError:
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        
-    if loop.is_running():
-        loop.create_task(main())
-    else:
-        loop.run_until_complete(main())
+    if loop.is_running(): loop.create_task(main())
+    else: loop.run_until_complete(main())
         
