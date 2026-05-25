@@ -5,114 +5,174 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import threading
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
-from telegram.ext import (
-    Application, CommandHandler, ContextTypes, 
-    ChatJoinRequestHandler, CallbackQueryHandler, ChatMemberHandler
-)
+from telegram.ext import Application, CommandHandler, ContextTypes, ChatJoinRequestHandler, CallbackQueryHandler, ChatMemberHandler
 
-start_time_init = time.time()
-users_list = set()
-groups_list = set()
-
+# Render Web Server for Port Bypass
 class WebServer(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-        self.wfile.write(b"Bot is active")
+        self.wfile.write(b"HottyApprovalBot is live and running perfectly!")
 
 def start_web_server():
     port = int(os.environ.get("PORT", 10000))
     server = HTTPServer(("0.0.0.0", port), WebServer)
     server.serve_forever()
 
+# ==================== CONFIGURATIONS ====================
 BOT_TOKEN = os.getenv("BOT_TOKEN", "8883025490:AAGMU-p-aI3_gCBxStH6MjkkBN__aubF7Ho")
-OWNER_ID = 8576582616
 BOT_USERNAME = os.getenv("BOT_USERNAME", "HottyApprovalBot")
 UPDATE_CHANNEL = os.getenv("UPDATE_CHANNEL", "Soothing_Sanctuary")
+SUPPORT_GRP = os.getenv("SUPPORT_GRP", "PrepNationGrp")
 DEVELOPER_USER = "Umm_hotty"
 LOGO_URL = "https://t.me/ahh_nexus/8"
+# ========================================================
 
-async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    start = time.time()
-    msg = await update.message.reply_text("Checking system...")
-    latency = round((time.time() - start) * 1000)
-    uptime = int(time.time() - start_time_init)
-    h, rem = divmod(uptime, 3600)
-    m, s = divmod(rem, 60)
-    text = f"<b>Latency:</b> {latency}ms\n<b>Uptime:</b> {h}h {m}m {s}s\n<b>Status:</b> Operational"
-    await msg.edit_text(text, parse_mode=ParseMode.HTML)
-
-async def broadcast(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_user.id != OWNER_ID:
-        return
-    
-    pin = False
-    if "-p" in context.args:
-        pin = True
-        context.args.remove("-p")
-    
-    msg_src = update.message.reply_to_message if update.message.reply_to_message else " ".join(context.args)
-    
-    if not msg_src:
-        await update.message.reply_text("Usage: /broadcast <text> or reply to msg [-p]")
-        return
-    
-    count = 0
-    targets = users_list.union(groups_list)
-    for tid in targets:
-        try:
-            if isinstance(msg_src, str):
-                sent = await context.bot.send_message(chat_id=tid, text=msg_src, parse_mode=ParseMode.HTML)
-            else:
-                sent = await context.bot.copy_message(chat_id=tid, from_chat_id=msg_src.chat_id, message_id=msg_src.message_id)
-            if pin:
-                await context.bot.pin_chat_message(chat_id=tid, message_id=sent.message_id)
-            count += 1
-            await asyncio.sleep(0.05)
-        except:
-            continue
-    await update.message.reply_text(f"Broadcast successful to {count} targets.")
-
-async def track_chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.my_chat_member.new_chat_member.status in ["administrator", "member"]:
-        groups_list.add(update.my_chat_member.chat.id)
-    else:
-        groups_list.discard(update.my_chat_member.chat.id)
-
+# 1. CLEAN START COMMAND (DM VIEW WITH SPOILER IMAGE)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
-    users_list.add(user.id)
-    text = f"👑 <b>AUTO APPROVE BOT</b>\n\nHey {user.first_name}\n\nI manage your community automatically.\n\nCreated by @{DEVELOPER_USER}"
-    buttons = [
-        [InlineKeyboardButton("Add to Group", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")],
-        [InlineKeyboardButton("Updates", url=f"https://t.me/{UPDATE_CHANNEL}")]
-    ]
-    await update.message.reply_photo(LOGO_URL, caption=text, parse_mode=ParseMode.HTML, reply_markup=InlineKeyboardMarkup(buttons))
+    
+    # Bina kisi stars, quotes ya faltu symbols ke clean text
+    text = (
+        f"👑 <b>𝗔𝗨𝗧𝗢 𝗔𝗣𝗣𝗥𝗢𝗩𝗘 𝗕𝗢𝗧</b> 👑\n\n"
+        f"👋 Hey <a href='tg://settings'>{user.first_name}</a>\n\n"
+        f"🦅 I am an instant <b>𝗔𝘂𝘁𝗼 𝗔𝗽𝗽𝗿𝗼𝘃𝗮𝗹 𝗦𝘆𝘀𝘁𝗲𝗺</b> built to manage your channels and groups automatically.\n\n"
+        f"📌 <b>HOW TO USE ME</b>\n"
+        f"Just add me as an <b>Administrator</b> in your chat with Invite Users via Link permission\n\n"
+        f"👑 <b>CREATED BY</b> @{DEVELOPER_USER}"
+    )
 
-async def approve(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    buttons = [
+        [
+            InlineKeyboardButton("🟩 Add me to Group ➕", url=f"https://t.me/{BOT_USERNAME}?startgroup=true"),
+            InlineKeyboardButton("🟩 Add me to Channel 📢", url=f"https://t.me/{BOT_USERNAME}?startchannel=true")
+        ],
+        [
+            InlineKeyboardButton("🔋 Boost & Updates 🤖", url=f"https://t.me/{UPDATE_CHANNEL}"),
+            InlineKeyboardButton("⚠️ Disclaimer & Policy", callback_data="disclaimer")
+        ]
+    ]
+
+    await update.message.reply_photo(
+        photo=LOGO_URL,
+        caption=text,
+        parse_mode=ParseMode.HTML,
+        has_spoiler=True,
+        reply_markup=InlineKeyboardMarkup(buttons)
+    )
+
+# 2. PING COMMAND
+async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    start_time = time.time()
+    message = await update.message.reply_text("⚡ Checking Speed", parse_mode=ParseMode.HTML)
+    end_time = time.time()
+    
+    latency = round((end_time - start_time) * 1000)
+    await message.edit_text(f"⚡ <b>Pong</b> {latency}ms 🟢", parse_mode=ParseMode.HTML)
+
+# 3. BOT ADDED TO CHAT
+async def bot_added_to_chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.my_chat_member and update.my_chat_member.new_chat_member.status in ["administrator", "member"]:
+        chat = update.my_chat_member.chat
+        
+        group_text = (
+            f"👑 <b>𝗛𝗼𝘁𝘁𝘆 𝗔𝗽𝗽𝗿𝗼𝘃𝗲 𝗕𝗼𝘁</b> is now <b>LIVE</b> 🟢\n\n"
+            f"📌 Grant Admin permissions with Invite Users via Link to auto-approve requests"
+        )
+        
+        group_buttons = [
+            [InlineKeyboardButton("🔋 CHECK BOT SETTINGS (DM) ➔", url=f"https://t.me/{BOT_USERNAME}?start=true")]
+        ]
+        
+        try:
+            await context.bot.send_message(
+                chat_id=chat.id,
+                text=group_text,
+                parse_mode=ParseMode.HTML,
+                reply_markup=InlineKeyboardMarkup(group_buttons)
+            )
+        except Exception:
+            pass
+
+# 4. INSTANT AUTO-APPROVAL -> DM NOTIFICATION
+async def approve_request(update: Update, context: ContextTypes.DEFAULT_TYPE):
     req = update.chat_join_request
-    users_list.add(req.from_user.id)
+    chat = req.chat
+    user = req.from_user
+
     try:
-        await context.bot.approve_chat_join_request(req.chat.id, req.from_user.id)
-        await context.bot.send_message(req.from_user.id, f"Your request for {req.chat.title} was approved.")
-    except:
+        await context.bot.approve_chat_join_request(chat_id=chat.id, user_id=user.id)
+    except Exception:
         pass
+
+    dm_text = (
+        f"✨ <b>JOIN REQUEST APPROVED</b> ✨\n"
+        f"━━━━━━━━━━━━━━━━━━━━\n\n"
+        f"🤝 Hello <a href='tg://settings'>{user.first_name}</a>\n\n"
+        f"🎉 Your request to join <b>{chat.title}</b> has been <b>Successfully Approved</b> instantly by our system\n\n"
+        f"🚀 Powered by @{BOT_USERNAME}"
+    )
+
+    dm_buttons = [
+        [
+            InlineKeyboardButton("📢 Bot Updates", url=f"https://t.me/{UPDATE_CHANNEL}"),
+            InlineKeyboardButton("👑 Developer", url=f"https://t.me/{DEVELOPER_USER}")
+        ]
+    ]
+
+    try:
+        await context.bot.send_message(
+            chat_id=user.id,
+            text=dm_text,
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(dm_buttons),
+            disable_web_page_preview=True
+        )
+    except Exception:
+        pass
+
+# 5. DISCLAIMER CALLBACK
+async def disclaimer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+
+    text = (
+        f"<b>📢 Disclaimer – Auto Approve Join Request Bot</b>\n\n"
+        f"🔹 This bot is an <b>automated system</b> that approves join requests By using this bot, you agree\n\n"
+        f"<b>✅ No Liability</b>\nThe bot owner and developers are <b>not responsible</b> for any misuse or unauthorized activity\n\n"
+        f"<b>🤖 Automated Decisions</b>\nThe bot works 100 percent automatically and instantly\n\n"
+        f"<b>📌 Ensure responsible usage to keep your community secure</b>"
+    )
+    await query.message.reply_text(text=text, parse_mode=ParseMode.HTML)
 
 async def main():
     app = Application.builder().token(BOT_TOKEN).build()
+
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("ping", ping))
-    app.add_handler(CommandHandler("broadcast", broadcast))
-    app.add_handler(ChatJoinRequestHandler(approve))
-    app.add_handler(ChatMemberHandler(track_chat, ChatMemberHandler.MY_CHAT_MEMBER))
-    
+    app.add_handler(CallbackQueryHandler(disclaimer_callback, pattern="disclaimer"))
+    app.add_handler(ChatJoinRequestHandler(approve_request))
+    app.add_handler(ChatMemberHandler(bot_added_to_chat, ChatMemberHandler.MY_CHAT_MEMBER))
+
     await app.initialize()
     await app.updater.start_polling()
     await app.start()
-    while True: await asyncio.sleep(3600)
+    
+    while True:
+        await asyncio.get_running_loop().run_in_executor(None, time.sleep, 3600)
 
 if __name__ == '__main__':
     threading.Thread(target=start_web_server, daemon=True).start()
-    asyncio.run(main())
+
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+    if loop.is_running():
+        loop.create_task(main())
+    else:
+        loop.run_until_complete(main())
     
