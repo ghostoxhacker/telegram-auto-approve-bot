@@ -37,27 +37,27 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"╭━━👑 <b>𝗔𝗨𝗧𝗢 𝗔𝗣𝗣𝗥𝗢𝗩𝗘 𝗕𝗢𝗧</b> 👑━━╮\n"
         f"   ✨ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ ɴᴇxᴛ-ɢᴇɴ sʏsᴛᴇᴍ ✨\n"
         f"╰━━━━━━━━━━━━━━━━━━━╯\n\n"
-        f"👋 𝖧𝖾𝗒 <a href='tg://settings'>{user.first_name}</a> !\n\n"
-        f"🦅 𝖨 𝖺𝗆 𝖺𝗇 𝗂𝗇𝗌𝗍𝖺𝗇𝗍 <b>𝗔𝘂𝘁𝗼 𝗔𝗽𝗽𝗿𝗼𝘃𝗮𝗹 𝗦𝘆𝘀𝘁𝗲𝗺</b> 𝖻𝗎𝗂𝗅𝗍 𝗍𝗈 𝖼𝗅𝖾𝖺𝗇𝗅𝗒 𝖺𝗎𝗍𝗈context𝗆𝖺𝗍𝖾 𝗒𝗈𝗎𝗋 𝖼𝗈𝗆𝗆𝗎𝗇𝗂ᴛ𝗒.\n\n"
+        f"👋 Hey <a href='tg://settings'>{user.first_name}</a> !\n\n"
+        f"🦅 I am an instant <b>𝗔𝘂𝘁𝗼 𝗔𝗽𝗽𝗿𝗼𝘃𝗮𝗹 𝗦𝘆𝘀𝘁𝗲𝗺</b> built to manage your community automatically.\n\n"
         f"⚡ <b>𝗣𝗥𝗘𝗠𝗜𝗨𝗠 𝗙𝗘𝗔𝗧𝗨𝗥𝗘𝗦 :</b>\n"
         f"╭━━━━━━━━━━━━━━━━━━━╮\n"
-        f"┃ 👤 <b>𝖨𝗇𝗌𝗍𝖺𝗇𝗍 𝖠𝗉𝗉𝗋𝗈𝗏𝖺𝗅</b> ➔ `0.01 s𝖾𝖼` \n"
-        f"┃ 🛡️ <b>𝖠𝗇𝗍𝗂-𝖲𝗉𝖺ᴍ</b> ➔ `𝖤𝗇𝖺𝖻𝗅𝖾𝖽`\n"
-        f"┃ 📈 <b>𝖴𝗉𝗍𝗂𝗆𝖾</b> ➔ `24/7 𝖭𝗈𝗇-𝖲ᴛᴏᴘ`\n"
+        f"┃ 👤 <b>Instant Approval</b> ➔ `0.01 sec` \n"
+        f"┃ 🛡️ <b>Anti-Spam</b> ➔ `Enabled`\n"
+        f"┃ 📈 <b>Uptime</b> ➔ `24/7 Non-Stop`\n"
         f"╰━━━━━━━━━━━━━━━━━━━╯\n\n"
-        f"📌 <b>ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴍᴇ :</b>\n"
-        f"🤖 𝖩𝗎𝗌ᴛ 𝖺𝖽𝖽 𝗆𝖾 𝖺𝗌 𝖺𝗇 <b>𝖠𝖽𝗆𝗂𝗇𝗂𝗌𝗍𝗋𝖺𝗍𝗈𝗋</b> 𝗂𝗇 𝗒𝗈𝗎𝗋 𝖢𝗁𝖺𝗇𝗇𝖾xl 𝗈𝗋 𝖦𝗋𝗈𝗎𝗉 𝗐𝗂ᴛʜ *\"𝖨𝗇𝗏𝗂ᴛ𝖾 𝖴𝗌𝖾𝗋𝗌 𝗏𝗂𝖺 𝖫𝗂𝗇ᴋ\"* 𝗉𝖾𝗋<b>𝗆𝗂𝗌𝗌𝗂𝗈𝗇!</b>\n\n"
-        f"👑 <b><b>ᴄʀᴇᴀᴛᴇᴅ</b> ʙʏ :</b> @{DEVELOPER_USER}"
+        f"📌 <b>HOW TO USE ME :</b>\n"
+        f"🤖 Just add me as an <b>Administrator</b> in your Channel or Group with *\"Invite Users via Link\"* permission!\n\n"
+        f"👑 <b>CREATED BY :</b> @{DEVELOPER_USER}"
     )
 
     buttons = [
         [
-            InlineKeyboardButton("🟩 𝖠𝖽𝖽 𝗆𝖾 𝗍𝗈 𝖦𝗋𝗈𝗎𝗉 ➕", url=f"https://t.me/{BOT_USERNAME}?startgroup=true"),
-            InlineKeyboardButton("🟩 𝖠𝖽𝖽 𝗆𝖾 𝗍𝗈 𝖢𝗁𝖺𝗇𝗇𝖾𝗅 📢", url=f"https://t.me/{BOT_USERNAME}?startchannel=true")
+            InlineKeyboardButton("🟩 Add me to Group ➕", url=f"https://t.me/{BOT_USERNAME}?startgroup=true"),
+            InlineKeyboardButton("🟩 Add me to Channel 📢", url=f"https://t.me/{BOT_USERNAME}?startchannel=true")
         ],
         [
-            InlineKeyboardButton("🔋 𝖡𝗈𝗈𝗌𝗍 & 𝖴𝗉𝖽𝖺𝗍𝖾𝗌 🤖", url=f"https://t.me/{UPDATE_CHANNEL}"),
-            InlineKeyboardButton("⚠️ 𝖣𝗂𝗌𝖼𝗅𝖺𝗂𝗆𝖾𝗋 & 𝖯𝗈𝗅𝗂𝖼𝗒", callback_data="disclaimer")
+            InlineKeyboardButton("🔋 Boost & Updates 🤖", url=f"https://t.me/{UPDATE_CHANNEL}"),
+            InlineKeyboardButton("⚠️ Disclaimer & Policy", callback_data="disclaimer")
         ]
     ]
 
@@ -72,11 +72,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # 2. PING COMMAND
 async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE):
     start_time = time.time()
-    message = await update.message.reply_text("⚡ *𝖯𝗂𝗇𝗀𝗂𝗇𝗀...*", parse_mode=ParseMode.MARKDOWN)
+    message = await update.message.reply_text("⚡ *Checking Speed...*", parse_mode=ParseMode.MARKDOWN)
     end_time = time.time()
     
     latency = round((end_time - start_time) * 1000)
-    await message.edit_text(f"⚡ <b>𝖯𝗈<b>𝗇𝗀!</b></b> `{latency}𝗆𝗌` 🟢", parse_mode=ParseMode.HTML)
+    await message.edit_text(f"⚡ <b>Pong!</b> `{latency}ms` 🟢", parse_mode=ParseMode.HTML)
 
 # 3. BOT ADDED TO CHAT
 async def bot_added_to_chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -84,12 +84,12 @@ async def bot_added_to_chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
         chat = update.my_chat_member.chat
         
         group_text = (
-            f"👑 <b>𝗛𝗼𝘁𝘁𝘆 𝗔𝗽𝗽𝗿𝗼𝘃𝗲 𝗕𝗼𝘁</b> ɪs ɴᴏᴡ **LIVE** 🟢\n\n"
+            f"👑 <b>𝗛𝗼𝘁𝘁𝘆 𝗔𝗽𝗽𝗿𝗼𝘃𝗲 𝗕𝗼𝘁</b> is now <b>LIVE</b> 🟢\n\n"
             f"📌 *Grant Admin permissions with \"Invite Users via Link\" to auto-approve requests.*"
         )
         
         group_buttons = [
-            [InlineKeyboardButton("🔋 𝖢𝖧𝖤𝖢𝖪 𝖡𝖮𝖳 𝖲𝖤𝖳𝖳𝖨𝖭𝖦𝖲 (𝖣𝖬) ➔", url=f"https://t.me/{BOT_USERNAME}?start=true")]
+            [InlineKeyboardButton("🔋 CHECK BOT SETTINGS (DM) ➔", url=f"https://t.me/{BOT_USERNAME}?start=true")]
         ]
         
         try:
@@ -102,7 +102,7 @@ async def bot_added_to_chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
         except Exception:
             pass
 
-# 4. INSTANT AUTO-APPROVAL -> DM NOTIFICATION (UPDATES & DEVELOPER BUTTONS)
+# 4. INSTANT AUTO-APPROVAL -> DM NOTIFICATION
 async def approve_request(update: Update, context: ContextTypes.DEFAULT_TYPE):
     req = update.chat_join_request
     chat = req.chat
@@ -114,7 +114,7 @@ async def approve_request(update: Update, context: ContextTypes.DEFAULT_TYPE):
         pass
 
     dm_text = (
-        f"✨ <b>ᴊᴏɪɴ ʀᴇǫᴜᴇsᴛ ᴀᴘᴘʀᴏᴠᴇᴅ</b> ✨\n"
+        f"✨ <b>JOIN REQUEST APPROVED</b> ✨\n"
         f"━━━━━━━━━━━━━━━━━━━━\n\n"
         f"🤝 Hello <a href='tg://settings'>{user.first_name}</a>,\n\n"
         f"🎉 Your request to join <b>{chat.title}</b> has been <b>Successfully Approved</b> instantly by our system!\n\n"
@@ -123,8 +123,8 @@ async def approve_request(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     dm_buttons = [
         [
-            InlineKeyboardButton("📢 𝖡𝗈𝗍 𝖴𝗉𝖽𝖺𝗍𝖾𝗌", url=f"https://t.me/{UPDATE_CHANNEL}"),
-            InlineKeyboardButton("👑 𝖣𝖾𝗏𝖾𝗅𝗈𝗉𝖾𝗋", url=f"https://t.me/{DEVELOPER_USER}")
+            InlineKeyboardButton("📢 Bot Updates", url=f"https://t.me/{UPDATE_CHANNEL}"),
+            InlineKeyboardButton("👑 Developer", url=f"https://t.me/{DEVELOPER_USER}")
         ]
     ]
 
@@ -167,7 +167,7 @@ async def main():
     await app.start()
     
     while True:
-        await asyncio.sleep(3600)
+        await asyncio.get_running_loop().run_in_executor(None, time.sleep, 3600)
 
 if __name__ == '__main__':
     threading.Thread(target=start_web_server, daemon=True).start()
@@ -182,4 +182,4 @@ if __name__ == '__main__':
         loop.create_task(main())
     else:
         loop.run_until_complete(main())
-               
+        
