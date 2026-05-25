@@ -3,11 +3,11 @@ from telegram.constants import ParseMode
 from telegram.ext import Application, CommandHandler, ContextTypes, ChatJoinRequestHandler, CallbackQueryHandler
 
 
-BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
-BOT_USERNAME = "YOUR_BOT_USERNAME_HERE_WITHOUT_@"
+BOT_TOKEN = "8883025490:AAGMU-p-aI3_gCBxStH6MjkkBN__aubF7Ho"
+BOT_USERNAME = "HottyApprovalBot"
 
-CHANNEL1 = "YOUR_CHANNEL_HERE_WITHOUT_@"
-CHANNEL2 = "YOUR_CHANNEL_HERE_WITHOUT_@"
+UPDATE = "Soothing_Sanctuary"
+SUPPORT = "PrepNationGrp"
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -20,15 +20,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             InlineKeyboardButton("📢 Add me to Channel", url=f"https://t.me/{BOT_USERNAME}?startchannel=true")
         ],
         [
-            InlineKeyboardButton("🤖 Bot Updates", url=f"https://t.me/{CHANNEL1}"),
-            InlineKeyboardButton("👨‍💻 More Bots", url=f"https://t.me/{CHANNEL2}")
+            InlineKeyboardButton("🤖 Bot Updates", url=f"https://t.me/{UPDATE}"),
+            InlineKeyboardButton("👨‍💻 Join Group", url=f"https://t.me/{SUPPORT}")
         ],
         [
             InlineKeyboardButton("⚠️ Disclaimer", callback_data="disclaimer")
         ]
     ]
 
-    text = f'Hi <a href="tg://settings">{user.first_name}</a>, I am a <b>Auto Approve Bot</b>. I can approve your channel or group join requests instantly.\n\n<b>Steps:</b>\n\nJust add me as an <b>administrator</b> to your group or channel to set me up!\n\nDisclaimer 👉 /disclaimer\n\nCreated By <b>@CoderAjinkya</b>'
+    text = f'Hi <a href="tg://settings">{user.first_name}</a>, I am a <b>Auto Approve Bot</b>. I can approve your channel or group join requests instantly.\n\n<b>Steps:</b>\n\nJust add me as an <b>administrator</b> to your group or channel to set me up!\n\nDisclaimer 👉 /disclaimer\n\nCreated By <b>@Umm_hotty</b>'
 
     await update.message.reply_text(
         text=text,
