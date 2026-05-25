@@ -29,25 +29,18 @@ DEVELOPER_USER = "Umm_hotty"
 LOGO_URL = "https://t.me/ahh_nexus/8"
 # ========================================================
 
-# 1. PREMIUM START COMMAND (DM VIEW WITH SPOILER IMAGE)
+# 1. CLEAN START COMMAND (DM VIEW WITH SPOILER IMAGE)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     
+    # Bina kisi stars, quotes ya faltu symbols ke clean text
     text = (
-        f"╭━━👑 <b>𝗔𝗨𝗧𝗢 𝗔𝗣𝗣𝗥𝗢𝗩𝗘 𝗕𝗢𝗧</b> 👑━━╮\n"
-        f"   ✨ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ ɴᴇxᴛ-ɢᴇɴ sʏsᴛᴇᴍ ✨\n"
-        f"╰━━━━━━━━━━━━━━━━━━━╯\n\n"
-        f"👋 Hey <a href='tg://settings'>{user.first_name}</a> !\n\n"
-        f"🦅 I am an instant <b>𝗔𝘂𝘁𝗼 𝗔𝗽𝗽𝗿𝗼𝘃𝗮𝗹 𝗦𝘆𝘀𝘁𝗲𝗺</b> built to manage your community automatically.\n\n"
-        f"⚡ <b>𝗣𝗥𝗘𝗠𝗜𝗨𝗠 𝗙𝗘𝗔𝗧𝗨𝗥𝗘𝗦 :</b>\n"
-        f"╭━━━━━━━━━━━━━━━━━━━╮\n"
-        f"┃ 👤 <b>Instant Approval</b> ➔ `0.01 sec` \n"
-        f"┃ 🛡️ <b>Anti-Spam</b> ➔ `Enabled`\n"
-        f"┃ 📈 <b>Uptime</b> ➔ `24/7 Non-Stop`\n"
-        f"╰━━━━━━━━━━━━━━━━━━━╯\n\n"
-        f"📌 <b>HOW TO USE ME :</b>\n"
-        f"🤖 Just add me as an <b>Administrator</b> in your Channel or Group with *\"Invite Users via Link\"* permission!\n\n"
-        f"👑 <b>CREATED BY :</b> @{DEVELOPER_USER}"
+        f"👑 <b>𝗔𝗨𝗧𝗢 𝗔𝗣𝗣𝗥𝗢𝗩𝗘 𝗕𝗢𝗧</b> 👑\n\n"
+        f"👋 Hey <a href='tg://settings'>{user.first_name}</a>\n\n"
+        f"🦅 I am an instant <b>𝗔𝘂𝘁𝗼 𝗔𝗽𝗽𝗿𝗼𝘃𝗮𝗹 𝗦𝘆𝘀𝘁𝗲𝗺</b> built to manage your channels and groups automatically.\n\n"
+        f"📌 <b>HOW TO USE ME</b>\n"
+        f"Just add me as an <b>Administrator</b> in your chat with Invite Users via Link permission\n\n"
+        f"👑 <b>CREATED BY</b> @{DEVELOPER_USER}"
     )
 
     buttons = [
@@ -72,11 +65,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # 2. PING COMMAND
 async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE):
     start_time = time.time()
-    message = await update.message.reply_text("⚡ *Checking Speed...*", parse_mode=ParseMode.MARKDOWN)
+    message = await update.message.reply_text("⚡ Checking Speed", parse_mode=ParseMode.HTML)
     end_time = time.time()
     
     latency = round((end_time - start_time) * 1000)
-    await message.edit_text(f"⚡ <b>Pong!</b> `{latency}ms` 🟢", parse_mode=ParseMode.HTML)
+    await message.edit_text(f"⚡ <b>Pong</b> {latency}ms 🟢", parse_mode=ParseMode.HTML)
 
 # 3. BOT ADDED TO CHAT
 async def bot_added_to_chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -85,7 +78,7 @@ async def bot_added_to_chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
         group_text = (
             f"👑 <b>𝗛𝗼𝘁𝘁𝘆 𝗔𝗽𝗽𝗿𝗼𝘃𝗲 𝗕𝗼𝘁</b> is now <b>LIVE</b> 🟢\n\n"
-            f"📌 *Grant Admin permissions with \"Invite Users via Link\" to auto-approve requests.*"
+            f"📌 Grant Admin permissions with Invite Users via Link to auto-approve requests"
         )
         
         group_buttons = [
@@ -116,9 +109,9 @@ async def approve_request(update: Update, context: ContextTypes.DEFAULT_TYPE):
     dm_text = (
         f"✨ <b>JOIN REQUEST APPROVED</b> ✨\n"
         f"━━━━━━━━━━━━━━━━━━━━\n\n"
-        f"🤝 Hello <a href='tg://settings'>{user.first_name}</a>,\n\n"
-        f"🎉 Your request to join <b>{chat.title}</b> has been <b>Successfully Approved</b> instantly by our system!\n\n"
-        f"🚀 *Powered by @{BOT_USERNAME}*"
+        f"🤝 Hello <a href='tg://settings'>{user.first_name}</a>\n\n"
+        f"🎉 Your request to join <b>{chat.title}</b> has been <b>Successfully Approved</b> instantly by our system\n\n"
+        f"🚀 Powered by @{BOT_USERNAME}"
     )
 
     dm_buttons = [
@@ -146,10 +139,10 @@ async def disclaimer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     text = (
         f"<b>📢 Disclaimer – Auto Approve Join Request Bot</b>\n\n"
-        f"🔹 This bot is an <b>automated system</b> that approves join requests. By using this bot, you agree:\n\n"
-        f"<b>✅ No Liability</b>\nThe bot owner & developers are <b>not responsible</b> for any misuse or unauthorized activity.\n\n"
-        f"<b>🤖 Automated Decisions</b>\nThe bot works 100% automatically and instantly.\n\n"
-        f"<b>📌 Ensure responsible usage to keep your community secure!</b>"
+        f"🔹 This bot is an <b>automated system</b> that approves join requests By using this bot, you agree\n\n"
+        f"<b>✅ No Liability</b>\nThe bot owner and developers are <b>not responsible</b> for any misuse or unauthorized activity\n\n"
+        f"<b>🤖 Automated Decisions</b>\nThe bot works 100 percent automatically and instantly\n\n"
+        f"<b>📌 Ensure responsible usage to keep your community secure</b>"
     )
     await query.message.reply_text(text=text, parse_mode=ParseMode.HTML)
 
